@@ -143,14 +143,14 @@ class Vspeed():
           if self.loop_count + 1 < self.seq_loop_max:
               self.seq_pos = 0
               self.loop_count += 1
-              print("LOOP",self.loop_count + 1,"of",self.seq_loop_max)
+              # print("LOOP",self.loop_count + 1,"of",self.seq_loop_max)
           elif self.seq_loop_max == 0: # loop forever
               self.seq_pos = 0
               self.loop_count += 1
-              print("LOOP",self.loop_count + 1,"of forever")
+              # print("LOOP",self.loop_count + 1,"of forever")
           else:
             return position, False, False
-        print("START sequence move",self.seq_pos,sequence[self.seq_pos])
+        # print("START sequence move",self.seq_pos,sequence[self.seq_pos])
         self.increment_seq_num = False
 
       position, running, changed = self.move(

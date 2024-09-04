@@ -41,7 +41,7 @@ class Creature:
     time_of_day = 0
     energy = 0
 
-
+    previous_state = state_beautiful
     current_state = state_day_nobody
 
     def __init__(self):
@@ -49,7 +49,7 @@ class Creature:
 
     def message(self, topic, msg):
         global color
-        print("recieved: Topic:" + str(topic) + " Message:" + str(msg))
+        # print("recieved: Topic:" + str(topic) + " Message:" + str(msg))
 
         # If we receive a new time of day
         if topic == "reefcontrol/timeofday":
@@ -63,6 +63,20 @@ class Creature:
     def sense(self):
         if button.sense() == True:
             return True
+
+    def print_state(self):
+        if self.current_state != self.previous_state:
+            if self.current_state == 0:
+                print("*** state_day_nobody")
+            elif self.current_state == 1:
+                print("*** state_day_somebody")
+            elif self.current_state == 2:
+                print("*** state_night_nobody")
+            elif self.current_state == 3:
+                print("*** state_night_somebody")
+            elif self.current_state == 4:
+                print("*** state_beautiful")
+        self.previous_state = self.current_state
 
 
     def checkState(self, isRunning):
@@ -106,7 +120,6 @@ class Creature:
             elif self.presence_timer.expired():
                 self.current_state = self.state_night_nobody
 
-
         elif self.current_state == self.state_beautiful:
             if not isRunning:
                 self.current_state = self.state_day_nobody
@@ -119,7 +132,8 @@ class Creature:
         position1, running1, changed1 = vs1.sequence(beh[0], beh[1]) # Here we input the sequence from sequence.py and our most important output is position1. This is the number we should currently be at when following our sequence
         position2, running2, changed2 = vs2.sequence(beh[2], beh[3]) # Same as above but for our second sequence
         self.checkState(running1 or running2)
-#         print(self.current_state)
+        self.print_state()
+
         ###############################################################
 		# This is about where you'll have to start coding yourself    #
         # If you want to test out the code here then do the following #
