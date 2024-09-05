@@ -22,9 +22,9 @@ color = (1, 0, 0, 0)
 
 MIN = 0
 MAX = 2 ** 16
-vs1 = Vspeed(init_position=0, result="int")
+vs1 = Vspeed(init_position=0, result="int", debug=False)
 vs1.set_bounds(lower_bound=MIN, upper_bound=MAX)
-vs2 = Vspeed(init_position=0, result="int")
+vs2 = Vspeed(init_position=0, result="int", debug=False)
 vs2.set_bounds(lower_bound=MIN, upper_bound=MAX)
 
 
